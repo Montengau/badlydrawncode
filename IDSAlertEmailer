@@ -1,0 +1,34 @@
+import smtplib
+
+smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+smtpObj.ehlo()
+
+smtpObj.starttls()
+print("connection successful")
+
+smtpObj.login('youremail', 'yourpassword')
+
+with open('/var/log/suricata/fast.log', 'r') as file:
+        lines=file.readlines()
+
+g = open('/var/log/suricata/daylogs.txt', 'w+')
+
+for i in range(1, 500):
+        g.write(lines[i*-1])
+
+print(g)
+
+g.close()
+
+with open ('/var/log/suricata/daylogs.txt', 'r') as file:
+        m = file.read()
+
+
+print(m)
+
+smtpObj.sendmail('youremail', 'youremail', 'Subject: IDS ALERTS\n\n'+m)
+
+smtpObj.quit()
+
+
+# if you run into issues with login, try this https://exerror.com/smtplib-smtpauthenticationerror-username-and-password-not-accepted/ 
