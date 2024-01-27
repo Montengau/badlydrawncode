@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 # install this script inside the /var/log/suricata directory, and set the script to be run every minute via a cronjob 
+# Raspberry Pi GPIO must be installed on the Pi beforehand with 3 different colored LEDs on the breadboard corresponding to GPIO pins 18, 23, 21
 
 import RPi.GPIO as g
 from time import sleep
